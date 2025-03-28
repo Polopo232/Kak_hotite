@@ -8,10 +8,10 @@
 -- db loomine
 create database Tarpv24
 
---?
+--db kasutamine
 DRop DataBASE Tarpv24
 
---?
+--tabeli Gender loomine
 create table Gender
 (
 Id int NOT NULL primary key,
