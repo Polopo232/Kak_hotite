@@ -103,7 +103,7 @@ select * from Person
 alter table Person
 add City nvarchar(25)
 
--- ?
+-- Näita inimesi tabelist Person, kelle linn on võrdne Gotham
 select * from Person where City = 'Gotham'
 
 
@@ -111,51 +111,55 @@ select * from Person where City = 'Gotham'
 select * from Person where City <> 'Gotham'
 select * from Person where City != 'Gotham'
 
--- ?
-select *from Person where Age = 100 or 
-Age = 50 or Age = 20
+-- Näidake tabelist inimesi Person, kelle vanus on 100 või 50 või 20 aastat
+select * from Person where Age = 100 or Age = 50 or Age = 20
 select * from Person where Age in (100, 50, 20)
 
 
---- ?
+--- Näidake tabelist inimesi Person kelle linn algab tähega n ja näidake inimesi, kelle e-posti aadress sisaldab @
 select * from Person where City like 'n%'
 select * from Person where Email like '%@%'
 
--- ?
+-- Näidake tabelist inimesi Person kes pole @-kirjas
 select * from Person where Email not like '%@%'
 
 --- näitab, kelle on emailis ees ja peale @-märki
 -- ainult üks täht
 select * from Person where Email like '_@_.com'
 
---?
+-- Näitab inimesi, kelle nime WAS-is ei kuvata
 select * from Person where Name like '[^WAS]%'
---- ?
+
+--- Näidake tabelist inimesi Person kelle linn on võrdne Gotham või New York ja kelle vanus on 40
 select * from Person where (City = 'Gotham' or City = 'New York')
 and Age >= 40
 
 ---võtab kolm esimest rida
 select top 3 * from Person
 
---- ?
+--- Näitab kogu tabelit Person ja esimesed 3 vanusereas ja esimesed 3 nimes
 select * from Person
 select top 3 Age, Name from Person
 
---- ?
+--- Näitab 50% tabeli koguandmete ridadest Person
 select top 50 percent * from Person
---?
+
+-- Sorteerib read tabelist Person veeru Age järgi
 select * from Person order by cast(Age as int)
+
+-- Sorteerib tabelist read Person veeru Age järgi
 select * from Person order by Age
 
---?
+--- Arvutab kõigi veerus Age olevate väärtuste summa
 select sum(cast(Age as int)) from Person
 
---?
+-- Määrab veeru Age minimaalse väärtuse.
 select min(cast(Age as int)) from Person
 
---?
+-- Määrab veeru Age maksimaalse väärtuse.
 select max(cast(Age as int)) from Person
 
+--- Iga kordumatu linna jaoks arvutab vanuse väärtuste summa ja kuvab selle koguvana.
 select City, sum(cast(Age as int)) as TotalAge from Person group by City
 
 
