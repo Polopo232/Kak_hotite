@@ -32,11 +32,12 @@ values (1, 'Female')
 insert into Gender (Id, Gender)
 values (2, 'Male')
 
---- ?
+--- Tabeli muutmine võõrvõtme määramise ja sellele piirangu andmisega
 alter table Person add constraint tblPerson_GenderId_FK
 foreign key (GenderId) references Gender(Id)
 
--- ?
+
+-- Sisestage andmed Person tabelisse
 insert into Person (Id, Name, Email, GenderId)
 values (1, 'Supermees', 's@s.com', 2)
 insert into Person (Id, Name, Email, GenderId)
@@ -55,13 +56,14 @@ values (7, 'Spiderman', 'spider@spiderman.com', 2)
 -- vaatame tabeli andmeid
 select * from Person
 
---- ?
+--- Tabeli muutmine piirangu kustutamisega
 alter table Person
 drop constraint tblPerson_GenderId_FK
 
--- ?
+-- Sisestage andmed Gender tabelisse
 insert into Gender (Id, Gender)
 values (3, 'Unknown')
+
 -- lisame võõrvõtme uuesti
 alter table Person
 add constraint DF_Person_GenderId
@@ -74,7 +76,7 @@ select * from Gender
 insert into Person (Id, Name, Email)
 values (8, 'Test', 'Test')
 
----?
+--- Vanuse veeru lisamine tabelisse Person
 alter table Person
 add Age nvarchar(10)
 
@@ -83,14 +85,14 @@ update Person
 set Age = 149
 where Id = 8
 
---?
+-- Tabeli muutmine sisestatud vanuste piirangu kehtestamisega
 alter table Person
 add constraint CK_Person_Age check (Age > 0 and Age < 150)
 
 insert into Person (Id, Name, Email, GenderId, Age)
 values (9, 'Test', 'Test', 2, 160)
 
---?
+--ID 8-ga isiku eemaldamine laualt Person
 select * from Person
 go
 delete from Person where Id = 8
