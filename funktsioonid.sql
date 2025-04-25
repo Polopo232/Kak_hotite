@@ -10,7 +10,7 @@ select Email, REPLACE(Email, '.com', '.net') as ConvertedEmail
 from Employees
 
 --- soovin asnedada peale esimest märki kolm tähte viie tärniga
-select FirstName, LastName, Email,
+select Name, Email,
 	stuff(Email, 2, 3, '*****') as StuffedEmail
 from Employees
 
